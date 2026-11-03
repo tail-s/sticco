@@ -31,8 +31,12 @@ Sources/Sticco/
 
 ## Releasing
 
+1. Add the new version's section to [CHANGELOG.md](../CHANGELOG.md) (it becomes the GitHub release notes) and update
+   the "What's new" line in both READMEs.
+2. Commit, then tag and push: `git tag -a v0.2.0 -m "Sticco 0.2.0" && git push origin main v0.2.0`.
+
 Pushing a tag such as `v0.2.0` makes GitHub Actions build a universal DMG, sign it with Developer ID, notarize it,
-and publish a GitHub release with generated notes. Signing and notarization run only when these repository secrets
+and publish a GitHub release whose notes are that version's CHANGELOG section. Signing and notarization run only when these repository secrets
 exist (Settings → Secrets and variables → Actions):
 
 | Secret | Value |

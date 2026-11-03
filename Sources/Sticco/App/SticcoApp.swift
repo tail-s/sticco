@@ -7,14 +7,6 @@ struct SticcoApp: App {
     @ObservedObject private var settings = AppSettings.shared
 
     var body: some Scene {
-        Settings {
-            SettingsView()
-                .environmentObject(AppSettings.shared)
-                .environmentObject(ThemeStore.shared)
-                .environmentObject(NoteStore.shared)
-        }
-        .commands { SticcoCommands(settings: settings) }
-
         MenuBarExtra("Sticco", systemImage: "note.text") {
             let s = settings.strings
             Button(s.newNote) { NoteWindowManager.shared.newNote() }
@@ -23,9 +15,10 @@ struct SticcoApp: App {
             Button(s.showAllNotes) { NoteWindowManager.shared.showAll() }
             Button(s.hideAllNotes) { NoteWindowManager.shared.hideAll() }
             Divider()
-            SettingsLink { Text(s.settings) }
+            Button(s.settings) { AppActions.openDashboard(settings: .general) }
             Button("Quit Sticco") { NSApp.terminate(nil) }
         }
+        .commands { SticcoCommands(settings: settings) }
     }
 }
 
@@ -34,6 +27,9 @@ struct SticcoCommands: Commands {
 
     var body: some Commands {
         let s = settings.strings
+        CommandGroup(replacing: .appSettings) {
+            Button("\(s.settings)…") { AppActions.openDashboard(settings: .general) }.keyboardShortcut(",")
+        }
         CommandGroup(replacing: .newItem) {
             Button(s.newNote) { NoteWindowManager.shared.newNote() }.keyboardShortcut("n")
             Button(s.dashboard) { AppActions.openDashboard() }.keyboardShortcut("0")
@@ -74,13 +70,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 enum AppActions {
     private static var dashboard: NSWindow?
 
-    static func openDashboard() {
+    static func openDashboard(settings pane: SettingsPane? = nil) {
+        if let pane { DashboardRouter.shared.settingsPane = pane }
         if dashboard == nil {
             let w = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 1080, height: 680),
                              styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
                              backing: .buffered, defer: false)
             w.isReleasedWhenClosed = false
             w.title = "Sticco"
+            w.titlebarAppearsTransparent = true
+            w.titleVisibility = .hidden
+            w.minSize = NSSize(width: 900, height: 560)
             w.contentView = NSHostingView(rootView: DashboardView()
                 .environmentObject(NoteStore.shared)
                 .environmentObject(AppSettings.shared)

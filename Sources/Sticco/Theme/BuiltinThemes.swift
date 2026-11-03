@@ -1,7 +1,39 @@
 /// The four built-in themes, written in the same theme.json format user themes use.
 enum BuiltinThemes {
-    static let json: [String] = [glass, paper, ink, pop]
+    static let json: [String] = [standard, glass, paper, ink, pop]
 
+    /// Opaque, calm, system-like. The app default.
+    static let standard = #"""
+    {
+      "id": "default", "version": 1,
+      "name": { "en": "Default", "ko": "기본", "ja": "デフォルト" },
+      "defaultFontTheme": "system",
+      "note": { "cornerRadius": 12, "material": "solid", "shadow": "soft", "titlebar": "compact",
+                "stage": "pill", "checkbox": "round", "bullet": "•", "titleSize": 17, "bodySize": 14 },
+      "light": {
+        "notes": {
+          "yellow": { "bg": "#FFF3B0", "ink": "#1F1A05" }, "peach": { "bg": "#FFDCCB", "ink": "#2A1208" },
+          "mint": { "bg": "#D2F2E0", "ink": "#0B2416" }, "sky": { "bg": "#D6E8FF", "ink": "#0A1E33" },
+          "lilac": { "bg": "#E7DDFF", "ink": "#1E1236" }, "graphite": { "bg": "#E6E6EA", "ink": "#1C1C1F" }
+        },
+        "stages": { "todo": "#5E5F66", "doing": "#1F63D0", "done": "#1A7D45", "custom": "#7E3DB8" },
+        "chrome": { "window": "#F6F6F8", "sidebar": "#ECECF0", "card": "#FFFFFF", "text": "#1D1D1F",
+                    "secondary": "#5E5E66", "accent": "#1F63D0", "separator": "#D8D8DE", "selection": "#DCE8FB" }
+      },
+      "dark": {
+        "notes": {
+          "yellow": { "bg": "#4D4419", "ink": "#FFF6CF" }, "peach": { "bg": "#4F2E22", "ink": "#FFE6DA" },
+          "mint": { "bg": "#1D4231", "ink": "#DAF7E7" }, "sky": { "bg": "#1C3552", "ink": "#DCEBFF" },
+          "lilac": { "bg": "#372A52", "ink": "#ECE3FF" }, "graphite": { "bg": "#36363C", "ink": "#F0F0F3" }
+        },
+        "stages": { "todo": "#A9AAB2", "doing": "#6AACFF", "done": "#5CD08E", "custom": "#C796F2" },
+        "chrome": { "window": "#1E1E22", "sidebar": "#26262B", "card": "#2C2C31", "text": "#F2F2F5",
+                    "secondary": "#A9A9B2", "accent": "#6AACFF", "separator": "#3A3A40", "selection": "#23406E" }
+      }
+    }
+    """#
+
+    /// Real translucency: the desktop shows through (Liquid Glass on macOS 26+).
     static let glass = #"""
     {
       "id": "glass", "version": 1,
@@ -11,9 +43,9 @@ enum BuiltinThemes {
                 "stage": "pill", "checkbox": "round", "bullet": "•", "titleSize": 17, "bodySize": 14 },
       "light": {
         "notes": {
-          "yellow": { "bg": "#FFF1A6C2", "ink": "#1F1A05" }, "peach": { "bg": "#FFD6C4C2", "ink": "#2A1208" },
-          "mint": { "bg": "#C9F2DCC2", "ink": "#0B2416" }, "sky": { "bg": "#CFE4FFC2", "ink": "#0A1E33" },
-          "lilac": { "bg": "#E3D8FFC2", "ink": "#1E1236" }, "graphite": { "bg": "#E2E2E7C2", "ink": "#1C1C1F" }
+          "yellow": { "bg": "#FFF1A66B", "ink": "#1F1A05" }, "peach": { "bg": "#FFD6C46B", "ink": "#2A1208" },
+          "mint": { "bg": "#C9F2DC6B", "ink": "#0B2416" }, "sky": { "bg": "#CFE4FF6B", "ink": "#0A1E33" },
+          "lilac": { "bg": "#E3D8FF6B", "ink": "#1E1236" }, "graphite": { "bg": "#E2E2E76B", "ink": "#1C1C1F" }
         },
         "stages": { "todo": "#5E5F66", "doing": "#1F63D0", "done": "#1A7D45", "custom": "#7E3DB8" },
         "chrome": { "window": "#F6F6F8", "sidebar": "#ECECF0", "card": "#FFFFFF", "text": "#1D1D1F",
@@ -21,9 +53,9 @@ enum BuiltinThemes {
       },
       "dark": {
         "notes": {
-          "yellow": { "bg": "#5A4E1AC7", "ink": "#FFF6CF" }, "peach": { "bg": "#5C3324C7", "ink": "#FFE6DA" },
-          "mint": { "bg": "#1F4A35C7", "ink": "#DAF7E7" }, "sky": { "bg": "#1E3A5CC7", "ink": "#DCEBFF" },
-          "lilac": { "bg": "#3D2E5CC7", "ink": "#ECE3FF" }, "graphite": { "bg": "#3A3A40C7", "ink": "#F0F0F3" }
+          "yellow": { "bg": "#5A4E1A8C", "ink": "#FFF6CF" }, "peach": { "bg": "#5C33248C", "ink": "#FFE6DA" },
+          "mint": { "bg": "#1F4A358C", "ink": "#DAF7E7" }, "sky": { "bg": "#1E3A5C8C", "ink": "#DCEBFF" },
+          "lilac": { "bg": "#3D2E5C8C", "ink": "#ECE3FF" }, "graphite": { "bg": "#3A3A408C", "ink": "#F0F0F3" }
         },
         "stages": { "todo": "#A9AAB2", "doing": "#6AACFF", "done": "#5CD08E", "custom": "#C796F2" },
         "chrome": { "window": "#1E1E22", "sidebar": "#26262B", "card": "#2C2C31", "text": "#F2F2F5",
@@ -41,7 +73,7 @@ enum BuiltinThemes {
                 "stage": "stamp", "checkbox": "inked", "bullet": "–", "titleSize": 20, "bodySize": 15 },
       "light": {
         "notes": {
-          "yellow": { "bg": "#FFF1A8", "ink": "#2B2610" }, "peach": { "bg": "#FFD9C2", "ink": "#3A1E10" },
+          "yellow": { "bg": "#FFF1A8", "ink": "#2B2610" }, "peach": { "bg": "#FFD96B", "ink": "#3A1E10" },
           "mint": { "bg": "#CFEFD9", "ink": "#14301F" }, "sky": { "bg": "#CFE6F7", "ink": "#122838" },
           "lilac": { "bg": "#E3D7F5", "ink": "#2A1C40" }, "graphite": { "bg": "#D9D4CA", "ink": "#26231E" }
         },

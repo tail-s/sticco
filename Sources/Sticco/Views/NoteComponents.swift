@@ -49,9 +49,14 @@ struct NoteBackground: View {
             default: EmptyView()
             }
             if style.material == .glass {
-                VisualEffectBlur().clipShape(shape)
-                shape.fill(colors.bg.color)
-                shape.strokeBorder(Color.white.opacity(0.35), lineWidth: 1)
+                // Blur what's behind the window, then tint it lightly so the desktop stays visible.
+                VisualEffectBlur(material: .popover).clipShape(shape)
+                if #available(macOS 26.0, *) {
+                    Color.clear.glassEffect(.regular.tint(colors.bg.color), in: shape)
+                } else {
+                    shape.fill(colors.bg.color)
+                }
+                shape.strokeBorder(Color.white.opacity(0.45), lineWidth: 1)
             } else {
                 shape.fill(colors.bg.color)
             }
@@ -225,4 +230,22 @@ enum AlarmText {
         day.doesRelativeDateFormatting = true
         return "\(day.string(from: alarm.date)) \(time.string(from: alarm.date))"
     }
+}
+
+/// Empty note areas (titlebar, gaps, footer) drag the window. SwiftUI content otherwise swallows the click.
+struct WindowDragArea: NSViewRepresentable {
+    var onMouseDown: () -> Void = {}
+
+    final class DragView: NSView {
+        var onMouseDown: () -> Void = {}
+        override var mouseDownCanMoveWindow: Bool { true }
+        override func mouseDown(with event: NSEvent) {
+            onMouseDown()
+            window?.makeFirstResponder(nil)
+            window?.performDrag(with: event)
+        }
+    }
+
+    func makeNSView(context: Context) -> DragView { let v = DragView(); v.onMouseDown = onMouseDown; return v }
+    func updateNSView(_ v: DragView, context: Context) { v.onMouseDown = onMouseDown }
 }

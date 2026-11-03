@@ -23,9 +23,14 @@
 - **Checklists without menus.** Start a line with `[ ]` for a checkbox or `-` for a bullet. Everything else is plain text.
 - **Never miss it.** Give any note an alarm — once, every day, on weekdays, or every week.
 - **See everything at once.** The dashboard shows all notes as a board or a list, with search and filters.
-- **Make it yours.** Four looks — Glass, Paper, Ink and Pop — six font styles, light and dark mode.
+- **Make it yours.** Five looks — Default, Glass, Paper, Ink and Pop — six font styles, light and dark mode.
 - **Speaks your language.** English, 한국어 and 日本語, switchable any time.
 - **Private by design.** No account, no cloud, no tracking. Your notes stay on your Mac.
+
+## What's new
+
+**0.1.1** — a new Default theme, a truly see-through Glass theme, settings inside the dashboard, a fresh icon,
+and fixes for moving and editing notes. See the [full changelog](CHANGELOG.md).
 
 ## Install
 
@@ -55,15 +60,15 @@ You can change this later in **System Settings → Notifications → Sticco**.
 
 ## Make it yours
 
-Open **Settings** (⌘,):
+Open **Settings** with ⌘, or from the bottom of the dashboard sidebar:
 
 - **General** — language, light/dark mode, open at login, alarm sound.
 - **Appearance** — pick a theme and a font style.
 - **Stages** — rename stages, change their order, or add your own (for example *Waiting*).
 
-| Glass | Paper | Ink | Pop |
-|---|---|---|---|
-| Clear and calm, like a built-in Mac app | Real sticky-note paper, handwritten feel | Black-and-white, plain-text focused | Bright, bold and playful |
+| Default | Glass | Paper | Ink | Pop |
+|---|---|---|---|---|
+| Clean and calm, like a built-in Mac app | See-through notes that let your desktop shine through | Real sticky-note paper, handwritten feel | Black-and-white, plain-text focused | Bright, bold and playful |
 
 Want your own look? A theme is one small file — see [how to make a theme](docs/THEMES.md).
 

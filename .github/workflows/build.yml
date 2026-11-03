@@ -67,6 +67,13 @@ jobs:
 
       - name: Publish release
         if: github.ref_type == 'tag'
-        run: gh release create "$GITHUB_REF_NAME" build/*.dmg --generate-notes
+        run: |
+          # Release notes = this version's section of CHANGELOG.md (falls back to generated notes)
+          awk -v v="$VERSION" '/^## \[/ { p = index($0, "[" v "]") > 0; next } /^\[[0-9]/ { p = 0 } p' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
+          if [[ -s "$RUNNER_TEMP/notes.md" ]]; then
+            gh release create "$GITHUB_REF_NAME" build/*.dmg --title "Sticco $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
+          else
+            gh release create "$GITHUB_REF_NAME" build/*.dmg --title "Sticco $VERSION" --generate-notes
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

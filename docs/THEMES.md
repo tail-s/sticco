@@ -1,6 +1,6 @@
 # Writing a theme
 
-A Sticco theme is a single `theme.json`. The four built-in themes (Glass, Paper, Ink, Pop) use exactly the same
+A Sticco theme is a single `theme.json`. The five built-in themes (Default, Glass, Paper, Ink, Pop) use exactly the same
 format — see [`BuiltinThemes.swift`](../Sources/Sticco/Theme/BuiltinThemes.swift) for complete examples.
 
 ## Install

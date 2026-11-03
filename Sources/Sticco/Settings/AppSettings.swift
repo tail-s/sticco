@@ -23,7 +23,7 @@ final class AppSettings: ObservableObject {
 
     private init() {
         language = AppLanguage(rawValue: defaults.string(forKey: "language") ?? "") ?? .en
-        themeID = defaults.string(forKey: "themeID") ?? "glass"
+        themeID = defaults.string(forKey: "themeID") ?? "default"
         fontThemeID = defaults.string(forKey: "fontThemeID")
         appearance = AppearanceMode(rawValue: defaults.string(forKey: "appearance") ?? "") ?? .auto
         alarmSound = defaults.object(forKey: "alarmSound") as? Bool ?? true

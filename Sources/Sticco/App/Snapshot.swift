@@ -20,10 +20,14 @@ enum Snapshot {
                 NSApp.appearance = NSAppearance(named: dark ? .darkAqua : .aqua)
                 let name = "\(theme.id)-\(dark ? "dark" : "light")"
                 render(SampleNotesBoard(), size: CGSize(width: 1040, height: 400), to: dir.appendingPathComponent("\(name)-notes.png"))
-                render(DashboardView(), size: CGSize(width: 1100, height: 640), to: dir.appendingPathComponent("\(name)-dashboard.png"))
+                render(DashboardView(), size: CGSize(width: 1100, height: 680), to: dir.appendingPathComponent("\(name)-dashboard.png"))
+                DashboardRouter.shared.settingsPane = .appearance
+                render(DashboardView(), size: CGSize(width: 1100, height: 680), to: dir.appendingPathComponent("\(name)-settings.png"))
+                DashboardRouter.shared.settingsPane = nil
             }
         }
-        render(SettingsView(), size: CGSize(width: 600, height: 520), to: dir.appendingPathComponent("settings.png"))
+        DashboardRouter.shared.settingsPane = .general
+        render(DashboardView(), size: CGSize(width: 1100, height: 680), to: dir.appendingPathComponent("settings-general.png"))
         (settings.themeID, settings.language, settings.appearance) = saved
         NSApp.terminate(nil)
         return true

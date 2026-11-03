@@ -78,7 +78,14 @@ struct NoteView: View {
         }
         .foregroundStyle(ink)
         .tint(ctx.palette.chrome.accent.color)
-        .background(NoteBackground(style: st, colors: colors))
+        .background(ZStack {
+            NoteBackground(style: st, colors: colors)
+            WindowDragArea { editing = false }
+        })
+        // Leaving the note (another window or app) ends editing.
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didResignKeyNotification)) { n in
+            if (n.object as? NoteWindow)?.noteID == noteID { editing = false }
+        }
     }
 
     // MARK: Pieces

@@ -24,6 +24,7 @@ struct Strings {
     var fontThemeNames: [String: String]
     var showAllNotes, hideAllNotes, version, viewSource, notifyPermission: String
     var progressFormat: String // {done} {total}
+    var edit, newNoteShortcut, preview, sampleTitle, sampleBody: String
 
     func progress(_ done: Int, _ total: Int) -> String {
         progressFormat.replacingOccurrences(of: "{done}", with: "\(done)").replacingOccurrences(of: "{total}", with: "\(total)")
@@ -50,7 +51,9 @@ struct Strings {
         fontThemeNames: ["system": "System", "plex": "Plex", "rounded": "Rounded", "hand": "Handwritten", "serif": "Serif", "mono": "Mono"],
         showAllNotes: "Show All Stickies", hideAllNotes: "Hide All Stickies", version: "Version", viewSource: "View Source on GitHub",
         notifyPermission: "Allow notifications in System Settings to hear alarms.",
-        progressFormat: "{done} of {total} done"
+        progressFormat: "{done} of {total} done",
+        edit: "Edit", newNoteShortcut: "New note shortcut", preview: "Preview", sampleTitle: "Launch checklist",
+        sampleBody: "[x] Write release notes\n[ ] Update the Homebrew cask\n- Ship before Friday"
     )
 
     static let ko = Strings(
@@ -74,7 +77,9 @@ struct Strings {
         fontThemeNames: ["system": "시스템", "plex": "플렉스", "rounded": "둥근 고딕", "hand": "손글씨", "serif": "명조", "mono": "고정폭"],
         showAllNotes: "모든 스티커 보이기", hideAllNotes: "모든 스티커 숨기기", version: "버전", viewSource: "GitHub에서 소스 보기",
         notifyPermission: "알림을 받으려면 시스템 설정에서 알림을 허용해 주세요.",
-        progressFormat: "{total}개 중 {done}개 완료"
+        progressFormat: "{total}개 중 {done}개 완료",
+        edit: "편집", newNoteShortcut: "새 메모 단축키", preview: "미리보기", sampleTitle: "출시 체크리스트",
+        sampleBody: "[x] 릴리스 노트 작성\n[ ] Homebrew cask 업데이트\n- 금요일 전에 배포하기"
     )
 
     static let ja = Strings(
@@ -98,6 +103,8 @@ struct Strings {
         fontThemeNames: ["system": "システム", "plex": "Plex", "rounded": "丸ゴシック", "hand": "手書き", "serif": "明朝", "mono": "等幅"],
         showAllNotes: "すべての付箋を表示", hideAllNotes: "すべての付箋を隠す", version: "バージョン", viewSource: "GitHubでソースを見る",
         notifyPermission: "アラームを受け取るには、システム設定で通知を許可してください。",
-        progressFormat: "{total}件中{done}件完了"
+        progressFormat: "{total}件中{done}件完了",
+        edit: "編集", newNoteShortcut: "新規メモのショートカット", preview: "プレビュー", sampleTitle: "リリースチェックリスト",
+        sampleBody: "[x] リリースノートを書く\n[ ] Homebrew caskを更新\n- 金曜日までに出す"
     )
 }
