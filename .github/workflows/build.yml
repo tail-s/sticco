@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch OFL fonts
+        run: scripts/fetch-fonts.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build app and DMG
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          [[ "$GITHUB_REF_TYPE" == "tag" ]] || VERSION="0.0.0-dev"
+          UNIVERSAL=1 scripts/build-app.sh "$VERSION"
+          scripts/make-dmg.sh "$VERSION"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Sticco-dmg
+          path: build/*.dmg
+      - name: Publish release
+        if: github.ref_type == 'tag'
+        run: gh release create "$GITHUB_REF_NAME" build/*.dmg --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
