@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Builds build/Sticco.app. Usage: scripts/build-app.sh [version]
 #   UNIVERSAL=1      build arm64 + x86_64
-#   SIGN_IDENTITY=…  "Developer ID Application: …" (default: ad-hoc signature)
+#   SIGN_IDENTITY=…  "Developer ID Application: Name (TEAMID)" (default: ad-hoc signature)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -24,5 +24,10 @@ if compgen -G "Resources/Fonts/*.[ot]t[fc]" > /dev/null; then
   cp Resources/Fonts/*.[ot]t[fc] Resources/Fonts/*.txt "$APP/Contents/Resources/Fonts/" 2>/dev/null || true
 fi
 
-codesign --force --options runtime --sign "${SIGN_IDENTITY:--}" "$APP"
+if [[ -n "${SIGN_IDENTITY:-}" ]]; then
+  # Developer ID: hardened runtime + secure timestamp, both required for notarization
+  codesign --force --options runtime --timestamp --sign "$SIGN_IDENTITY" "$APP"
+else
+  codesign --force --options runtime --sign - "$APP"   # ad-hoc, local use only
+fi
 echo "Built $APP ($VERSION)"

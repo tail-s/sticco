@@ -14,5 +14,5 @@ DMG="build/Sticco-$VERSION.dmg"
 rm -f "$DMG"
 hdiutil create -volname "Sticco" -srcfolder "$STAGE" -ov -format UDZO "$DMG" > /dev/null
 rm -rf "$STAGE"
-[[ -n "${SIGN_IDENTITY:-}" ]] && codesign --sign "$SIGN_IDENTITY" "$DMG"
+if [[ -n "${SIGN_IDENTITY:-}" ]]; then codesign --timestamp --sign "$SIGN_IDENTITY" "$DMG"; fi
 echo "Created $DMG"

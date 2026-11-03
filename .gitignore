@@ -6,3 +6,5 @@ Resources/Fonts/*.ttf
 Resources/Fonts/*.otf
 Resources/Fonts/*.txt
 *.xcodeproj/xcuserdata/
+*.p12
+*.p8

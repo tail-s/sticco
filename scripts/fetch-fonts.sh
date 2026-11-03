@@ -15,9 +15,12 @@ FAMILIES=(
   jetbrainsmono nanumgothiccoding mplus1code # Mono
 )
 
+AUTH=()
+[[ -n "${GITHUB_TOKEN:-}" ]] && AUTH=(-H "Authorization: Bearer $GITHUB_TOKEN")
+
 for fam in "${FAMILIES[@]}"; do
   echo "→ $fam"
-  curl -fsSL "https://api.github.com/repos/google/fonts/contents/ofl/$fam" |
+  curl -fsSL ${AUTH[@]+"${AUTH[@]}"} "https://api.github.com/repos/google/fonts/contents/ofl/$fam" |
     python3 -c '
 import json, sys
 for f in json.load(sys.stdin):
